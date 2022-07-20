@@ -99,6 +99,7 @@ if(UNIX)
     ${PROJECT_NAME}
     ${SDL2_LIBRARY}
     ${SDL2MAIN_LIBRARY}
+    dl
     m
     pthread)
 endif(UNIX)
