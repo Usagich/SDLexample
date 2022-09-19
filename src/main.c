@@ -2,14 +2,21 @@
  *
  *  A simple SDL 2.0.x sample project.
  *
- *  Copyright (c) 2022, Michael Fitzmayer. All rights reserved.
- *  SPDX-License-Identifier: MIT
+ *  To the extent possible under law, Michael Fitzmayer has waived all
+ *  copyright and related or neighboring rights to SDLexample.  This
+ *  work is published from: Germany.
+ *
+ *  CC0 http://creativecommons.org/publicdomain/zero/1.0/
+ *  SPDX-License-Identifier: CC0-1.0
  *
  **/
 
 #include <stdlib.h>
 #include "SDL.h"
 #include "SDL_main.h"
+
+#define WINDOW_WIDTH  320
+#define WINDOW_HEIGHT 240
 
 int main(int argc, char* argv[])
 {
@@ -30,8 +37,8 @@ int main(int argc, char* argv[])
         "SDLexample",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        800,
-        600,
+        176,
+        208,
         0);
 
     if (NULL == window)

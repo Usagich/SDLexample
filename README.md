@@ -29,5 +29,8 @@ make
 
 ## License and Credits
 
-This project is licensed under the "The MIT License".  See the file
-[LICENSE.md](LICENSE.md) for details.
+This project is under [public domain](http://creativecommons.org/publicdomain/zero/1.0/).
+
+To the extent possible under law, Michael Fitzmayer has waived all
+copyright and related or neighboring rights to SDLexample.  This work is
+published from: Germany.
