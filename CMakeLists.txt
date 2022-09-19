@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 project(SDLexample C)
 
 set(CMAKE_C_STANDARD 90)
@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 90)
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
 # SDL2
-set(SDL2_VERSION "2.0.22")
+set(SDL2_VERSION "2.24.0")
 
 if (WIN32)
   if (CMAKE_BUILD_TYPE MATCHES Release)
@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 
   set(SDL2_DEVEL_PKG SDL2-devel-${SDL2_VERSION}-VC.zip)
-  set(SDL2_PLATFORM  "x64")
+  set(SDL2_PLATFORM "x64")
 
   if(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(SDL2_PLATFORM "x86")
@@ -24,7 +24,7 @@ if (WIN32)
 
   ExternalProject_Add(SDL2_devel
     URL https://github.com/libsdl-org/SDL/releases/download/release-${SDL2_VERSION}/${SDL2_DEVEL_PKG}
-    URL_HASH SHA1=efa040633c4faf8b006c0c1e552456ca4e5a3a53
+    URL_HASH SHA1=8a54459189e88c30ba024ee5f18ce4b1a5d1d9e7
     DOWNLOAD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps
     DOWNLOAD_NO_PROGRESS true
     TLS_VERIFY true
@@ -51,7 +51,7 @@ if(UNIX)
 
   ExternalProject_Add(SDL2_devel
     URL https://github.com/libsdl-org/SDL/releases/download/release-${SDL2_VERSION}/${SDL2_DEVEL_PKG}
-    URL_HASH SHA1=66dd460befa7f4c4664b7591228a3951bbbb19a7
+    URL_HASH SHA1=04d7768f4418ba03537ef14a86a0c1c45582f5c3
     DOWNLOAD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps
     DOWNLOAD_NO_PROGRESS true
     TLS_VERIFY true
