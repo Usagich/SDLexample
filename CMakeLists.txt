@@ -1,7 +1,19 @@
+# Do not modify this file unless absolutely necessary.
+# All project-specific settings can be found in the file:
+# project_config.cmake
+
 cmake_minimum_required(VERSION 3.10)
-project(SDLexample C)
+
+if(BUILD_FOR_NOKIA_NGAGE)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Nokia_N-Gage.cmake)
+  return()
+endif()
+
+project(SDLexample C CXX)
 
 set(CMAKE_C_STANDARD 90)
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/project_config.cmake)
 
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
@@ -72,31 +84,28 @@ include_directories(
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
   SYSTEM ${SDL2_INCLUDE_DIR})
 
-set(project_sources
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c)
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_CURRENT_SOURCE_DIR}/export)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/export)
 
 add_executable(
-  ${PROJECT_NAME}
+  ${PROJECT_TITLE}
   ${GUI_TYPE}
   ${project_sources})
 
 add_dependencies(
-  ${PROJECT_NAME}
+  ${PROJECT_TITLE}
   SDL2_devel)
 
 if(WIN32)
   target_link_libraries(
-    ${PROJECT_NAME}
+    ${PROJECT_TITLE}
     ${SDL2_LIBRARY}
     ${SDL2MAIN_LIBRARY})
 endif(WIN32)
 
 if(UNIX)
   target_link_libraries(
-    ${PROJECT_NAME}
+    ${PROJECT_TITLE}
     ${SDL2_LIBRARY}
     ${SDL2MAIN_LIBRARY}
     dl

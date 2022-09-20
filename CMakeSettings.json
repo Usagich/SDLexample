@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "x64-Debug",
+            "name": "x64 (Debug)",
             "generator": "Ninja",
             "configurationType": "Debug",
             "buildRoot": "${projectDir}\\out\\build\\${name}",
@@ -24,7 +24,7 @@
             ]
         },
         {
-            "name": "x64-Release",
+            "name": "x64 (Release)",
             "generator": "Ninja",
             "configurationType": "Release",
             "buildRoot": "${projectDir}\\out\\build\\${name}",
@@ -43,6 +43,29 @@
                     "name": "SDL2_LIBRARY",
                     "value": "${projectDir}\\deps\\SDL2-2.0.22\\lib\\x64\\SDL2.lib",
                     "type": "FILEPATH"
+                }
+            ]
+        },
+        {
+            "name": "N-Gage",
+            "generator": "Ninja",
+            "configurationType": "Release",
+            "inheritEnvironments": [ "msvc_x64_x64" ],
+            "buildRoot": "${projectDir}\\out\\build\\${name}",
+            "installRoot": "${projectDir}\\out\\install\\${name}",
+            "cmakeCommandArgs": "-DBUILD_FOR_NOKIA_NGAGE=ON",
+            "buildCommandArgs": "",
+            "ctestCommandArgs": "",
+            "variables": [
+                {
+                    "name": "INSTALL_EKA2L1",
+                    "value": "True",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "GENERATE_SIS",
+                    "value": "True",
+                    "type": "BOOL"
                 }
             ]
         }

@@ -3,7 +3,8 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0069c2a70179435ab5f0a4fb201fab02)](https://www.codacy.com/gh/mupfdev/SDLexample/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mupfdev/SDLexample&amp;utm_campaign=Badge_Grade)
 [![CMake](https://github.com/mupfdev/SDLexample/actions/workflows/cmake.yml/badge.svg)](https://github.com/mupfdev/SDLexample/actions/workflows/cmake.yml)
 
-A simple [SDL 2.0.x](https://github.com/libsdl-org/SDL) sample project.
+A simple [SDL 2.0.x](https://github.com/libsdl-org/SDL) sample/template
+project.
 
 ## Compiling
 
@@ -14,6 +15,19 @@ with [C++ CMake tools for
 Windows](https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio)
 installed.  Simply open the cloned repository via `File -> Open ->
 Folder`.  Everything else is set up automatically.
+
+### Nokia N-Gage
+
+The procedure for the Nokia N-Gage is the same as for Windows. You only
+need to install and set up the [N-Gage
+SDK.](https://github.com/ngagesdk/ngage-toolchain) in advance and select
+the respective build configuration within Visual Studio.
+
+Please note: In order for the SDL executable to be executed properly by
+the launcher, the path in the file
+[ngage_appui.cpp](src/ngage_appui.cpp) file must be adjusted
+accordingly.  Unfortunately, I have not yet found a way to configure
+this dynamically.
 
 ### Linux
 
