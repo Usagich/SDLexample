@@ -19,8 +19,8 @@
 #  define WINDOW_WIDTH  176
 #  define WINDOW_HEIGHT 208
 #else
-#  define WINDOW_WIDTH  320
-#  define WINDOW_HEIGHT 240
+#  define WINDOW_WIDTH  640
+#  define WINDOW_HEIGHT 480
 #endif
 
 int main(int argc, char* argv[])
