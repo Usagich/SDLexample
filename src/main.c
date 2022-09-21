@@ -19,21 +19,23 @@
 #  define WINDOW_WIDTH  176
 #  define WINDOW_HEIGHT 208
 #else
-#  define WINDOW_WIDTH  640
-#  define WINDOW_HEIGHT 480
+#  define WINDOW_WIDTH  320
+#  define WINDOW_HEIGHT 240
 #endif
 
 int main(int argc, char* argv[])
 {
-    int           status     = EXIT_SUCCESS;
-    SDL_bool      is_running = SDL_TRUE;
-    SDL_Window   *window     = NULL;
-    SDL_Renderer *renderer   = NULL;
+    int           status        = EXIT_SUCCESS;
+    SDL_bool      is_running    = SDL_TRUE;
+    SDL_Window*   window        = NULL;
+    SDL_Renderer* renderer      = NULL;
+    SDL_Texture*  render_target = NULL;
     SDL_Event     event;
 
 #if !defined (__NGAGE__)
-    SDL_Surface  *frame_sf   = NULL;
-    SDL_Texture  *frame      = NULL;
+    SDL_Surface  *frame_sf = NULL;
+    SDL_Texture  *frame    = NULL;
+    SDL_Rect      viewport = { 72, 11, 176, 208 };
 #endif
 
     if (0 != SDL_Init(SDL_INIT_VIDEO))
@@ -58,10 +60,18 @@ int main(int argc, char* argv[])
         goto quit;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_TARGETTEXTURE);
     if (NULL == renderer)
     {
         SDL_Log("Unable to create renderer: %s", SDL_GetError());
+        status = EXIT_FAILURE;
+        goto quit;
+    }
+
+    render_target = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB444, SDL_TEXTUREACCESS_TARGET, 176, 208);
+    if (NULL == render_target)
+    {
+        SDL_Log("Unable to create render target: %s", SDL_GetError());
         status = EXIT_FAILURE;
         goto quit;
     }
@@ -94,6 +104,15 @@ int main(int argc, char* argv[])
         goto quit;
     }
     SDL_FreeSurface(frame_sf);
+    if (SDL_RenderClear(renderer) < 0)
+    {
+        SDL_Log("Unable to clear current rendering target: %s", SDL_GetError());
+    }
+
+    if (SDL_RenderCopy(renderer, frame, NULL, NULL) < 0)
+    {
+        SDL_Log("Unable to copy to current rendering target: %s", SDL_GetError());
+    }
 #endif
 
     while (SDL_TRUE == is_running)
@@ -120,15 +139,44 @@ int main(int argc, char* argv[])
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 0xff, 00, 0x51, 0xff);
-        SDL_RenderClear(renderer);
+        if (SDL_SetRenderTarget(renderer, render_target) < 0)
+        {
+            SDL_Log("Unable to set render target: %s", SDL_GetError());
+        }
+
+        if (SDL_SetRenderDrawColor(renderer, 0xff, 00, 0x51, 0xff) < 0)
+        {
+            SDL_Log("Unable to set draw color: %s", SDL_GetError());
+        }
+
+        if (SDL_RenderClear(renderer) < 0)
+        {
+            SDL_Log("Unable to clear current rendering target: %s", SDL_GetError());
+        }
+
+        // Render magic should happen here.
+
+        if (SDL_SetRenderTarget(renderer, NULL) < 0)
+        {
+            SDL_Log("Unable to set render target: %s", SDL_GetError());
+        }
 #if !defined (__NGAGE__)
-        SDL_RenderCopy(renderer, frame, NULL, NULL);
+        if (SDL_RenderCopy(renderer, render_target, NULL, &viewport) < 0)
+#else
+        if (SDL_RenderCopy(renderer, render_target, NULL, NULL) < 0)
 #endif
+        {
+            SDL_Log("Unable to copy to current rendering target: %s", SDL_GetError());
+        }
         SDL_RenderPresent(renderer);
     }
 
 quit:
+    if (NULL != render_target)
+    {
+        SDL_DestroyTexture(render_target);
+    }
+
 #if !defined (__NGAGE__)
     if (NULL != frame)
     {
