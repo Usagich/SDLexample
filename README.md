@@ -25,7 +25,7 @@ the respective build configuration within Visual Studio.
 
 Please note: In order for the SDL executable to be executed properly by
 the launcher, the path in the file
-[ngage_appui.cpp](src/ngage_appui.cpp) file must be adjusted
+[ngage_appui.cpp](src/ngage_appui.cpp#L35) file must be adjusted
 accordingly.  Unfortunately, I have not yet found a way to configure
 this dynamically.
 
