@@ -1,6 +1,7 @@
 # SDLexample
 
 [![CMake](https://github.com/ngagesdk/SDLexample/actions/workflows/cmake.yml/badge.svg)](https://github.com/ngagesdk/SDLexample/actions/workflows/cmake.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ed8f1a506c6b49e0aafdf291f8d8b030)](https://www.codacy.com/gh/ngagesdk/SDLexample/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngagesdk/SDLexample&amp;utm_campaign=Badge_Grade)
 
 A simple [SDL 2.0.x](https://github.com/libsdl-org/SDL) sample/template
 project.
